@@ -10,14 +10,14 @@ const SongList = ({ songListActive }) => {
       }`}
     >
       <h2>Songs</h2>
-      <div className="songs">
+      <ul className="songs">
         <SingleSong />
         <SingleSong />
         <SingleSong />
         <SingleSong />
         <SingleSong />
         <SingleSong />
-      </div>
+      </ul>
     </div>
   );
 };
