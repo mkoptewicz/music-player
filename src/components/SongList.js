@@ -2,7 +2,7 @@ import SingleSong from "./SingleSong";
 
 import "./SongList.css";
 
-const SongList = ({ songListActive }) => {
+const SongList = ({ songListActive, songs, currentSong }) => {
   return (
     <div
       className={`song-list-container ${
@@ -11,12 +11,13 @@ const SongList = ({ songListActive }) => {
     >
       <h2>Songs</h2>
       <ul className="songs">
-        <SingleSong />
-        <SingleSong />
-        <SingleSong />
-        <SingleSong />
-        <SingleSong />
-        <SingleSong />
+        {songs.map(song => (
+          <SingleSong
+            key={song.audioUrl}
+            song={song}
+            isCurrent={song.url === currentSong.url}
+          />
+        ))}
       </ul>
     </div>
   );

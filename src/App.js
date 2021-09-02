@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import Nav from "./components/Nav";
 import Player from "./components/Player";
@@ -11,7 +11,10 @@ const URL = "https://examples.devmastery.pl/songs-api/songs";
 function App() {
   const [songListActive, setSongListActive] = useState(false);
   const [songs, setSongs] = useState([]);
-  
+  const [currentSongIndex, setCurrentSongIndex] = useState(0);
+  const currentSong = songs[currentSongIndex];
+
+  const audioRef = useRef();
 
   useEffect(() => {
     const fetchSongs = async () => {
@@ -36,8 +39,12 @@ function App() {
       <Nav onToggleSongList={setSongListActive} />
       <SongInfo />
       <Player />
-      <SongList songListActive={songListActive} />
-      <audio></audio>
+      <SongList
+        songListActive={songListActive}
+        songs={songs}
+        currentSong={currentSong}
+      />
+      <audio ref={audioRef} src={currentSong?.audioUrl}></audio>
     </div>
   );
 }
