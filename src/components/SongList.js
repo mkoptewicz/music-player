@@ -2,12 +2,15 @@ import SingleSong from "./SingleSong";
 
 import "./SongList.css";
 
-const SongList = () => {
+const SongList = ({ songListActive }) => {
   return (
-    <div className="song-list-container song-list-expanded">
+    <div
+      className={`song-list-container ${
+        songListActive ? "song-list-expanded" : ""
+      }`}
+    >
       <h2>Songs</h2>
       <div className="songs">
-        <SingleSong />
         <SingleSong />
         <SingleSong />
         <SingleSong />

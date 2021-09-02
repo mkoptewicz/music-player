@@ -1,10 +1,13 @@
 import "./Nav.css";
 
-const Nav = () => {
+const Nav = ({ onToggleSongList }) => {
+  const toggleSongListHandler = () => {
+    onToggleSongList(prevSongListIsActive => !prevSongListIsActive);
+  };
   return (
     <nav>
       <h1>Songify</h1>
-      <button>Song list</button>
+      <button onClick={toggleSongListHandler}>Song list</button>
     </nav>
   );
 };
