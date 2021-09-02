@@ -3,6 +3,8 @@ import IconPlay from "./Icons/IconPlay";
 import IconSkipStart from "./Icons/IconSkipStart";
 import IconSkipEnd from "./Icons/IconSkipEnd";
 import IconVolume from "./Icons/IconVolume";
+
+import "./Player.css";
 const Player = () => {
   return (
     <div className="player">
@@ -10,10 +12,11 @@ const Player = () => {
         <span>0:00</span>
         <div className="track">
           <input type="range" />
+          <div className="track-progress"></div>
         </div>
-        <div className="track-progess"></div>
+        <span>3:00</span>
       </div>
-      <span>3:00</span>
+
       <div className="controls">
         <IconSkipStart />
         <IconPause />

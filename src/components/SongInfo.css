@@ -1,0 +1,16 @@
+.song-container {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.cover {
+  max-width: 80%;
+  margin: 1rem;
+  border-radius: 40px;
+  overflow: hidden;
+}
+.song-container > * {
+  margin-bottom: 1rem;
+}

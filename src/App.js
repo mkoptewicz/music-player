@@ -3,13 +3,15 @@ import Player from "./components/Player";
 import SongInfo from "./components/SongInfo";
 import SongList from "./components/SongList";
 
+import "./App.css";
+
 function App() {
   return (
     <div className="App">
       <Nav />
       <SongInfo />
       <Player />
-      <SongList />
+      {/* <SongList /> */}
       <audio></audio>
     </div>
   );

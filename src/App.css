@@ -1,5 +1,18 @@
 * {
- margin: 0;
- padding: 0;
- box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: #777;
+  font-family: "Lato", sans-serif;
+}
+.App {
+  min-height: 100vh;
+  background-color: #151515;
+  color: white;
+}
+img {
+  max-width: 100%;
+  display: block;
 }
