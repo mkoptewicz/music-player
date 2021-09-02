@@ -20,3 +20,8 @@ img {
   max-width: 100%;
   display: block;
 }
+@media screen and (max-width: 768px) {
+  .song-list-active {
+    margin-left: 0;
+  }
+}

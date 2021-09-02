@@ -16,7 +16,7 @@
 }
 .song-list-container h2 {
   display: flex;
-  justify-content: center;
+  padding-left: 50px;
   align-items: center;
   height: 10vh;
 }
@@ -31,13 +31,13 @@
 }
 .song {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding: 1rem 2rem;
   cursor: pointer;
 }
 .song img {
-  max-width: 35%;
+  max-width: 40%;
   border-radius: 15px;
 }
 .song-info {
