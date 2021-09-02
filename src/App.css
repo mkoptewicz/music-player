@@ -4,13 +4,16 @@
   box-sizing: border-box;
 }
 body {
-  background-color: #777;
   font-family: "Lato", sans-serif;
 }
 .App {
   min-height: 100vh;
   background-color: #151515;
   color: white;
+  transition: all 0.5s ease;
+}
+.song-list-active {
+  margin-left: 20rem;
 }
 img {
   max-width: 100%;

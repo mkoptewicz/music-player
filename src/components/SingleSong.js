@@ -1,9 +1,14 @@
 const SingleSong = () => {
   return (
     <div className="song">
-      <img src="" alt="" />
-      <p className="title">Title</p>
-      <p className="artist">Artist</p>
+      <img
+        src="https://examples.devmastery.pl/assets/audio/berlin-dream.jpg"
+        alt=""
+      />
+      <div className="song-info">
+        <p className="title">Title ad dadsa adasd</p>
+        <p className="artist">Artist</p>
+      </div>
     </div>
   );
 };

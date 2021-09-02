@@ -16,6 +16,7 @@ nav button {
   outline: none;
   border-radius: 5px;
   border: 2px solid #4433ff;
+  z-index: 1;
 }
 nav button:hover,
 nav button:focus {

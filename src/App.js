@@ -7,11 +7,11 @@ import "./App.css";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App song-list-active">
       <Nav />
       <SongInfo />
       <Player />
-      {/* <SongList /> */}
+      <SongList />
       <audio></audio>
     </div>
   );
