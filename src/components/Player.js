@@ -29,17 +29,16 @@ const Player = ({
       </div>
 
       <div className="controls">
-        <button>
+        <button onClick={() => onChangeSong("prev")}>
           <IconSkipStart />
         </button>
         <button onClick={playSongHandler}>
-          {isPlaying ? <IconPause /> : <IconPlay />}{" "}
-        </button>
-        <button onClick={() => onChangeSong("prev")}>
-          <IconSkipEnd />
+          {isPlaying ? <IconPause /> : <IconPlay />}
         </button>
         <button onClick={() => onChangeSong("next")}>
-          {" "}
+          <IconSkipEnd />
+        </button>
+        <button>
           <IconVolume />
         </button>
       </div>
