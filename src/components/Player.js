@@ -5,11 +5,18 @@ import IconSkipEnd from "./Icons/IconSkipEnd";
 import IconVolume from "./Icons/IconVolume";
 
 import "./Player.css";
-const Player = ({ audioRef, isPlaying, onTogglePlay }) => {
+const Player = ({
+  audioRef,
+  isPlaying,
+  onTogglePlay,
+  currentSong,
+  onChangeSong,
+}) => {
   const playSongHandler = () => {
     isPlaying ? audioRef.current.pause() : audioRef.current.play();
     onTogglePlay(prevIsPlaying => !prevIsPlaying);
   };
+
   return (
     <div className="player">
       <div className="time-bar">
@@ -28,10 +35,10 @@ const Player = ({ audioRef, isPlaying, onTogglePlay }) => {
         <button onClick={playSongHandler}>
           {isPlaying ? <IconPause /> : <IconPlay />}{" "}
         </button>
-        <button>
+        <button onClick={() => onChangeSong("prev")}>
           <IconSkipEnd />
         </button>
-        <button>
+        <button onClick={() => onChangeSong("next")}>
           {" "}
           <IconVolume />
         </button>

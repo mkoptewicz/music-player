@@ -13,6 +13,7 @@ function App() {
   const [songs, setSongs] = useState([]);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const currentSong = songs[currentSongIndex];
 
   const audioRef = useRef();
@@ -32,24 +33,57 @@ function App() {
       } catch (err) {
         console.error(err.message);
       }
+      setIsLoading(false);
     };
     fetchSongs();
   }, []);
+
+  const changeSongHandler = direction => {
+    if (direction === "prev") {
+      setCurrentSongIndex(
+        currentSongIndex === 0 ? songs.length - 1 : currentSongIndex - 1
+      );
+    }
+    if (direction === "next") {
+      setCurrentSongIndex(
+        currentSongIndex === songs.length - 1 ? 0 : currentSongIndex + 1
+      );
+    }
+  };
+  const selectSongHandler = selectedSong => {
+    const audioIndex = songs.findIndex(
+      song => song.audioUrl === selectedSong.audioUrl
+    );
+    if (audioIndex >= 0) {
+      setCurrentSongIndex(audioIndex);
+      setIsPlaying(true);
+    }
+  };
+
   return (
     <div className={`App ${songListActive ? "song-list-active" : ""}`}>
       <Nav onToggleSongList={setSongListActive} />
-      <SongInfo />
-      <Player
-        audioRef={audioRef}
-        isPlaying={isPlaying}
-        onTogglePlay={setIsPlaying}
-      />
-      <SongList
-        songListActive={songListActive}
-        songs={songs}
-        currentSong={currentSong}
-      />
-      <audio ref={audioRef} src={currentSong?.audioUrl}></audio>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <>
+          <SongInfo song={currentSong} />
+          <Player
+            audioRef={audioRef}
+            isPlaying={isPlaying}
+            onTogglePlay={setIsPlaying}
+            currentSong={currentSong}
+            onChangeSong={changeSongHandler}
+          />
+          <SongList
+            songListActive={songListActive}
+            songs={songs}
+            currentSong={currentSong}
+            onSelect={selectSongHandler}
+          />
+          <audio ref={audioRef} src={currentSong?.audioUrl} ></audio>
+        </>
+      )}
     </div>
   );
 }
