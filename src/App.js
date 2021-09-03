@@ -12,6 +12,7 @@ function App() {
   const [songListActive, setSongListActive] = useState(false);
   const [songs, setSongs] = useState([]);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
   const currentSong = songs[currentSongIndex];
 
   const audioRef = useRef();
@@ -38,7 +39,11 @@ function App() {
     <div className={`App ${songListActive ? "song-list-active" : ""}`}>
       <Nav onToggleSongList={setSongListActive} />
       <SongInfo />
-      <Player />
+      <Player
+        audioRef={audioRef}
+        isPlaying={isPlaying}
+        onTogglePlay={setIsPlaying}
+      />
       <SongList
         songListActive={songListActive}
         songs={songs}

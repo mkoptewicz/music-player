@@ -19,10 +19,15 @@
 }
 .controls {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   padding: 1rem;
   width: 40%;
+}
+.controls button {
+  background-color: transparent;
+  border: none;
+  color: #fff;
 }
 
 .track {
