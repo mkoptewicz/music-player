@@ -14,9 +14,14 @@ function App() {
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [songTime, changeSongTime] = useState({
+    currentTime: null,
+    totalTime: null,
+  });
   const currentSong = songs[currentSongIndex];
 
   const audioRef = useRef();
+  const isFirstOpen = useRef(true);
 
   useEffect(() => {
     const fetchSongs = async () => {
@@ -38,15 +43,30 @@ function App() {
     fetchSongs();
   }, []);
 
+  useEffect(() => {
+    if (isLoading) {
+      return;
+    }
+    if (!isFirstOpen.current) {
+      audioRef.current.pause();
+
+      audioRef.current.src = currentSong.audioUrl;
+      audioRef.current.play();
+      setIsPlaying(true);
+    } else {
+      isFirstOpen.current = false;
+    }
+  }, [isFirstOpen, isLoading, currentSong?.audioUrl]);
+
   const changeSongHandler = direction => {
     if (direction === "prev") {
-      setCurrentSongIndex(
-        currentSongIndex === 0 ? songs.length - 1 : currentSongIndex - 1
+      setCurrentSongIndex(prevCurrentSongIndex =>
+        prevCurrentSongIndex === 0 ? songs.length - 1 : prevCurrentSongIndex - 1
       );
     }
     if (direction === "next") {
-      setCurrentSongIndex(
-        currentSongIndex === songs.length - 1 ? 0 : currentSongIndex + 1
+      setCurrentSongIndex(prevCurrentSongIndex =>
+        prevCurrentSongIndex === songs.length - 1 ? 0 : prevCurrentSongIndex + 1
       );
     }
   };
@@ -81,7 +101,7 @@ function App() {
             currentSong={currentSong}
             onSelect={selectSongHandler}
           />
-          <audio ref={audioRef} src={currentSong?.audioUrl} ></audio>
+          <audio ref={audioRef} src={currentSong?.audioUrl}></audio>
         </>
       )}
     </div>
