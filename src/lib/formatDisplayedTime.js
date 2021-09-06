@@ -1,6 +1,6 @@
 const formatDisplayedTime = duration => {
   if (!duration) {
-    return { minutes: "00", seconds: "00" };
+    return { minutes: null, seconds: null };
   }
   const minutes = Math.floor(duration / 60)
     .toString()

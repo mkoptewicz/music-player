@@ -3,6 +3,7 @@ import IconPlay from "./Icons/IconPlay";
 import IconSkipStart from "./Icons/IconSkipStart";
 import IconSkipEnd from "./Icons/IconSkipEnd";
 import IconVolume from "./Icons/IconVolume";
+import { ReactComponent as Spinner } from "../assets/spinner.svg";
 
 import formatDisplayedTime from "../lib/formatDisplayedTime";
 
@@ -30,7 +31,7 @@ const Player = ({
     <div className="player">
       <div className="time-bar">
         <span>
-          {elapsedMinutes}:{elapsedSeconds}
+          {elapsedMinutes || "00"}:{elapsedSeconds || "00"}
         </span>
         <div className="track">
           <input
@@ -44,9 +45,16 @@ const Player = ({
             style={{ transform: `translateX(${percentage}%)` }}
           ></div>
         </div>
-        <span>
-          {minutes}:{seconds}
-        </span>
+        {seconds && (
+          <span>
+            {minutes}:{seconds}
+          </span>
+        )}
+        {!seconds && (
+          <span>
+            <Spinner />
+          </span>
+        )}
       </div>
 
       <div className="controls">
