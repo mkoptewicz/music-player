@@ -4,28 +4,49 @@ import IconSkipStart from "./Icons/IconSkipStart";
 import IconSkipEnd from "./Icons/IconSkipEnd";
 import IconVolume from "./Icons/IconVolume";
 
+import formatDisplayedTime from "../lib/formatDisplayedTime";
+
 import "./Player.css";
 const Player = ({
   audioRef,
   isPlaying,
   onTogglePlay,
-  currentSong,
   onChangeSong,
+  songInfo,
+  onDrag,
 }) => {
   const playSongHandler = () => {
     isPlaying ? audioRef.current.pause() : audioRef.current.play();
     onTogglePlay(prevIsPlaying => !prevIsPlaying);
   };
+  const { currentTime, duration } = songInfo;
+  const { minutes, seconds } = formatDisplayedTime(duration);
+  const percentage = Math.round((currentTime / duration) * 100);
+
+  const { minutes: elapsedMinutes, seconds: elapsedSeconds } =
+    formatDisplayedTime(currentTime);
 
   return (
     <div className="player">
       <div className="time-bar">
-        <span>0:00</span>
+        <span>
+          {elapsedMinutes}:{elapsedSeconds}
+        </span>
         <div className="track">
-          <input type="range" />
-          <div className="track-progress"></div>
+          <input
+            value={currentTime}
+            type="range"
+            onChange={e => onDrag(e.target.value)}
+            max={duration || 0}
+          />
+          <div
+            className="track-progress"
+            style={{ transform: `translateX(${percentage}%)` }}
+          ></div>
         </div>
-        <span>3:00</span>
+        <span>
+          {minutes}:{seconds}
+        </span>
       </div>
 
       <div className="controls">

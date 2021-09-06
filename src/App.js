@@ -14,10 +14,8 @@ function App() {
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [songTime, changeSongTime] = useState({
-    currentTime: null,
-    totalTime: null,
-  });
+  const [songInfo, setSongInfo] = useState({ currentTime: 0, duration: 0 });
+
   const currentSong = songs[currentSongIndex];
 
   const audioRef = useRef();
@@ -34,7 +32,6 @@ function App() {
         }
         const data = await response.json();
         setSongs(data);
-        console.log(data);
       } catch (err) {
         console.error(err.message);
       }
@@ -79,6 +76,19 @@ function App() {
       setIsPlaying(true);
     }
   };
+  const timeUpdateHandler = e => {
+    const current = e.target.currentTime;
+    const duration = e.target.duration;
+
+    setSongInfo({
+      currentTime: current,
+      duration: duration,
+    });
+  };
+  const dragHandler = value => {
+    audioRef.current.currentTime = value;
+    setSongInfo({ ...songInfo, currentTime: value });
+  };
 
   return (
     <div className={`App ${songListActive ? "song-list-active" : ""}`}>
@@ -94,6 +104,8 @@ function App() {
             onTogglePlay={setIsPlaying}
             currentSong={currentSong}
             onChangeSong={changeSongHandler}
+            songInfo={songInfo}
+            onDrag={dragHandler}
           />
           <SongList
             songListActive={songListActive}
@@ -101,7 +113,13 @@ function App() {
             currentSong={currentSong}
             onSelect={selectSongHandler}
           />
-          <audio ref={audioRef} src={currentSong?.audioUrl}></audio>
+          <audio
+            ref={audioRef}
+            src={currentSong?.audioUrl}
+            onLoadedMetadata={timeUpdateHandler}
+            onTimeUpdate={timeUpdateHandler}
+            onEnded={() => changeSongHandler("next")}
+          ></audio>
         </>
       )}
     </div>
