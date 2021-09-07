@@ -3,6 +3,7 @@ import SingleSong from "./SingleSong";
 import "./SongList.css";
 
 const SongList = ({ songListActive, songs, currentSong, onSelect }) => {
+  console.log(currentSong);
   return (
     <div
       className={`song-list-container ${
@@ -10,12 +11,12 @@ const SongList = ({ songListActive, songs, currentSong, onSelect }) => {
       }`}
     >
       <h2>Songs</h2>
-      <ul className="songs">
+      <ul>
         {songs.map(song => (
           <SingleSong
             key={song.audioUrl}
             song={song}
-            isCurrent={song.url === currentSong.url}
+            isCurrent={song.audioUrl === currentSong.audioUrl}
             onSelect={onSelect}
           />
         ))}

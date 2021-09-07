@@ -1,0 +1,27 @@
+.song {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: inherit;
+  text-align: left;
+  background-color: transparent;
+  border: none;
+  padding: 1rem 2rem;
+  cursor: pointer;
+}
+.song--current {
+  background: linear-gradient(90deg, #4433ff 0%, #ca15c9 100%);
+}
+.song img {
+  max-width: 40%;
+  border-radius: 15px;
+}
+.song-details {
+  margin-left: 1rem;
+}
+.title {
+  font-weight: bold;
+}
+.artist {
+  opacity: 0.7;
+}
