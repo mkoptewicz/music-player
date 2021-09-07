@@ -1,9 +1,11 @@
+import React from 'react';
+
 import SingleSong from "./SingleSong";
 
 import "./SongList.css";
 
-const SongList = ({ songListActive, songs, currentSong, onSelect }) => {
-  console.log(currentSong);
+const SongList = React.memo(({ songListActive, songs, currentSong, onSelect }) => {
+  console.log("song list runs");
   return (
     <div
       className={`song-list-container ${
@@ -23,6 +25,6 @@ const SongList = ({ songListActive, songs, currentSong, onSelect }) => {
       </ul>
     </div>
   );
-};
+});
 
 export default SongList;

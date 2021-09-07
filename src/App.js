@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 
 import Nav from "./components/Nav";
 import Player from "./components/Player";
@@ -67,15 +67,18 @@ function App() {
       );
     }
   };
-  const selectSongHandler = selectedSong => {
-    const audioIndex = songs.findIndex(
-      song => song.audioUrl === selectedSong.audioUrl
-    );
-    if (audioIndex >= 0) {
-      setCurrentSongIndex(audioIndex);
-      setIsPlaying(true);
-    }
-  };
+  const selectSongHandler = useCallback(
+    selectedSong => {
+      const audioIndex = songs.findIndex(
+        song => song.audioUrl === selectedSong.audioUrl
+      );
+      if (audioIndex >= 0) {
+        setCurrentSongIndex(audioIndex);
+        setIsPlaying(true);
+      }
+    },
+    [songs]
+  );
   const timeUpdateHandler = e => {
     const current = e.target.currentTime;
     const duration = e.target.duration;
