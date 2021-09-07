@@ -1,3 +1,4 @@
+
 .player {
   min-height: 20vh;
   display: flex;
@@ -60,11 +61,6 @@ input[type="range"]::-moz-range-thumb {
   background: transparent;
   border: none;
 }
-
-/* input[type="range"]:focus {
-  outline: none;
-} */
-
 @media screen and (max-width: 768px) {
   .time-bar {
     width: 90%;
