@@ -58,16 +58,19 @@ const Player = ({
       </div>
 
       <div className="controls">
-        <button onClick={() => onChangeSong("prev")}>
+        <button onClick={() => onChangeSong("prev")} aria-label="previous song">
           <IconSkipStart />
         </button>
-        <button onClick={playSongHandler}>
+        <button
+          onClick={playSongHandler}
+          aria-label={`${isPlaying ? "pause" : "play"}`}
+        >
           {isPlaying ? <IconPause /> : <IconPlay />}
         </button>
-        <button onClick={() => onChangeSong("next")}>
+        <button onClick={() => onChangeSong("next")} aria-label="next song">
           <IconSkipEnd />
         </button>
-        <button>
+        <button aria-label="change volume">
           <IconVolume />
         </button>
       </div>
