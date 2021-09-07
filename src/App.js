@@ -15,7 +15,11 @@ function App() {
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [songInfo, setSongInfo] = useState({ currentTime: 0, duration: 0 });
+  const [songInfo, setSongInfo] = useState({
+    currentTime: 0,
+    duration: 0,
+    volume: 0.5,
+  });
 
   const currentSong = songs[currentSongIndex];
 
@@ -84,14 +88,16 @@ function App() {
     const current = e.target.currentTime;
     const duration = e.target.duration;
 
-    setSongInfo({
-      currentTime: current,
-      duration: duration,
-    });
+    setSongInfo({ ...songInfo, currentTime: current, duration: duration });
   };
   const dragHandler = value => {
     audioRef.current.currentTime = value;
     setSongInfo({ ...songInfo, currentTime: value });
+  };
+  const changeVolumeHandler = e => {
+    audioRef.current.volume = e.target.value;
+    setSongInfo({ ...songInfo, volume: e.target.value });
+    console.log(songInfo.volume);
   };
 
   return (
@@ -110,6 +116,7 @@ function App() {
             onChangeSong={changeSongHandler}
             songInfo={songInfo}
             onDrag={dragHandler}
+            onChangeVolume={changeVolumeHandler}
           />
           <SongList
             songListActive={songListActive}

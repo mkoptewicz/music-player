@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import IconPause from "./Icons/IconPause";
 import IconPlay from "./Icons/IconPlay";
 import IconSkipStart from "./Icons/IconSkipStart";
@@ -8,6 +10,7 @@ import { ReactComponent as Spinner } from "../assets/spinner.svg";
 import formatDisplayedTime from "../lib/formatDisplayedTime";
 
 import "./Player.css";
+
 const Player = ({
   audioRef,
   isPlaying,
@@ -15,11 +18,21 @@ const Player = ({
   onChangeSong,
   songInfo,
   onDrag,
+  onChangeVolume
 }) => {
+  const [volumeBarActive, setVolumeBarActive] = useState(false);
+
   const playSongHandler = () => {
     isPlaying ? audioRef.current.pause() : audioRef.current.play();
     onTogglePlay(prevIsPlaying => !prevIsPlaying);
   };
+
+  const toggleVolumeActiveHandler = () => {
+    setVolumeBarActive(prevVolumeBarActive => !prevVolumeBarActive);
+  };
+
+  
+
   const { currentTime, duration } = songInfo;
   const { minutes, seconds } = formatDisplayedTime(duration);
   const percentage = Math.round((currentTime / duration) * 100);
@@ -70,9 +83,19 @@ const Player = ({
         <button onClick={() => onChangeSong("next")} aria-label="next song">
           <IconSkipEnd />
         </button>
-        <button aria-label="change volume">
+        <button onClick={toggleVolumeActiveHandler} aria-label="change volume">
           <IconVolume />
         </button>
+        {volumeBarActive && (
+          <input
+            type="range"
+            onChange={onChangeVolume}
+            value={songInfo.volume}
+            max="1"
+            min="0"
+            step="0.01"
+          ></input>
+        )}
       </div>
     </div>
   );
