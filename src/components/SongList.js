@@ -5,7 +5,7 @@ import SingleSong from "./SingleSong";
 import "./SongList.css";
 
 const SongList = React.memo(({ songListActive, songs, currentSong, onSelect }) => {
-  console.log("song list runs");
+  
   return (
     <div
       className={`song-list-container ${
