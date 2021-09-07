@@ -97,7 +97,6 @@ function App() {
   const changeVolumeHandler = e => {
     audioRef.current.volume = e.target.value;
     setSongInfo({ ...songInfo, volume: e.target.value });
-    console.log(songInfo.volume);
   };
 
   return (
