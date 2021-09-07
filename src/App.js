@@ -4,6 +4,7 @@ import Nav from "./components/Nav";
 import Player from "./components/Player";
 import SongInfo from "./components/SongInfo";
 import SongList from "./components/SongList";
+import { ReactComponent as SpinnerBig } from "./assets/spinner-big.svg";
 
 import "./App.css";
 const URL = "https://examples.devmastery.pl/songs-api/songs";
@@ -97,7 +98,7 @@ function App() {
     <div className={`App ${songListActive ? "song-list-active" : ""}`}>
       <Nav onToggleSongList={setSongListActive} />
       {isLoading ? (
-        <p>Loading...</p>
+        <SpinnerBig />
       ) : (
         <>
           <SongInfo song={currentSong} />
