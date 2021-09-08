@@ -23,3 +23,4 @@ Features:
 - song change by clicking the previous and next buttons or selecting the song from the expandable list
 - volume adjustment
 - rewinding the track by dragging or clicking on the track progress bar
+- autoplay when songs ends
