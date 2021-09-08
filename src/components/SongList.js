@@ -8,7 +8,7 @@ const SongList = React.memo(({ songListActive, songs, currentSong, onSelect }) =
   
   return (
     <div
-      className={`song-list-container ${
+      className={`song-list ${
         songListActive ? "song-list-expanded" : ""
       }`}
     >
