@@ -60,6 +60,11 @@ function App() {
     }
   }, [isFirstOpen, isLoading, currentSong?.audioUrl]);
 
+  const playSongHandler = () => {
+    isPlaying ? audioRef.current.pause() : audioRef.current.play();
+    setIsPlaying(prevIsPlaying => !prevIsPlaying);
+  };
+
   const changeSongHandler = direction => {
     if (direction === "prev") {
       setCurrentSongIndex(prevCurrentSongIndex =>
@@ -108,9 +113,8 @@ function App() {
         <>
           <SongInfo song={currentSong} />
           <Player
-            audioRef={audioRef}
+            onPlaySong={playSongHandler}
             isPlaying={isPlaying}
-            onTogglePlay={setIsPlaying}
             currentSong={currentSong}
             onChangeSong={changeSongHandler}
             songInfo={songInfo}

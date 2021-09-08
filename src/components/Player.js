@@ -12,26 +12,18 @@ import formatDisplayedTime from "../lib/formatDisplayedTime";
 import "./Player.css";
 
 const Player = ({
-  audioRef,
+  onPlaySong,
   isPlaying,
-  onTogglePlay,
   onChangeSong,
   songInfo,
   onDrag,
-  onChangeVolume
+  onChangeVolume,
 }) => {
   const [volumeBarActive, setVolumeBarActive] = useState(false);
-
-  const playSongHandler = () => {
-    isPlaying ? audioRef.current.pause() : audioRef.current.play();
-    onTogglePlay(prevIsPlaying => !prevIsPlaying);
-  };
 
   const toggleVolumeActiveHandler = () => {
     setVolumeBarActive(prevVolumeBarActive => !prevVolumeBarActive);
   };
-
-  
 
   const { currentTime, duration } = songInfo;
   const { minutes, seconds } = formatDisplayedTime(duration);
@@ -75,7 +67,7 @@ const Player = ({
           <IconSkipStart />
         </button>
         <button
-          onClick={playSongHandler}
+          onClick={onPlaySong}
           aria-label={`${isPlaying ? "pause" : "play"}`}
         >
           {isPlaying ? <IconPause /> : <IconPlay />}
